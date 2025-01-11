@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "title": "Hello",
+    "description": "Discover the best of Mexico City with BestCDMX - your ultimate guide to restaurants, attractions, and local experiences."
+  },
+  "navigation": {
+    "home": "Home",
+    "restaurants": "Restaurants",
+    "guides": "Guides",
+    "about": "About",
+    "search": "Search",
+    "language": "Language"
+  },
+  "home": {
+    "hero": {
+      "title": "Discover Mexico City",
+      "subtitle": "Your guide to the best restaurants, attractions, and hidden gems",
+      "cta": "Start Exploring"
+    },
+    "featured": {
+      "title": "Featured Restaurants",
+      "subtitle": "Hand-picked selections from our experts",
+      "viewAll": "View All Restaurants"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Get the latest updates about Mexico City's best spots",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "success": "Thanks for subscribing!",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "About BestCDMX",
+      "description": "Your trusted guide to experiencing the best of Mexico City."
+    },
+    "links": {
+      "title": "Quick Links",
+      "restaurants": "Restaurants",
+      "guides": "City Guides",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    },
+    "copyright": "© 2024 BestCDMX. All rights reserved."
+  }
+}

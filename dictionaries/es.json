@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "title": "salud",
+    "description": "Descubre lo mejor de la Ciudad de México con BestCDMX - tu guía definitiva de restaurantes, atracciones y experiencias locales."
+  },
+  "navigation": {
+    "home": "Inicio",
+    "restaurants": "Restaurantes",
+    "guides": "Guías",
+    "about": "Nosotros",
+    "search": "Buscar",
+    "language": "Idioma"
+  },
+  "home": {
+    "hero": {
+      "title": "Descubre la Ciudad de México",
+      "subtitle": "Tu guía para los mejores restaurantes, atracciones y lugares secretos",
+      "cta": "Comienza a Explorar"
+    },
+    "featured": {
+      "title": "Restaurantes Destacados",
+      "subtitle": "Selecciones especiales de nuestros expertos",
+      "viewAll": "Ver Todos los Restaurantes"
+    },
+    "newsletter": {
+      "title": "Mantente Actualizado",
+      "subtitle": "Recibe las últimas actualizaciones sobre los mejores lugares de la Ciudad de México",
+      "placeholder": "Ingresa tu correo",
+      "button": "Suscribirse",
+      "success": "¡Gracias por suscribirte!",
+      "error": "Algo salió mal. Por favor intenta de nuevo."
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "Sobre BestCDMX",
+      "description": "Tu guía de confianza para experimentar lo mejor de la Ciudad de México."
+    },
+    "links": {
+      "title": "Enlaces Rápidos",
+      "restaurants": "Restaurantes",
+      "guides": "Guías de la Ciudad",
+      "about": "Nosotros",
+      "contact": "Contacto"
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Uso"
+    },
+    "copyright": "© 2024 BestCDMX. Todos los derechos reservados."
+  }
+}
