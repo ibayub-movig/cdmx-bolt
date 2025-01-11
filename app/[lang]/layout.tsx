@@ -1,11 +1,12 @@
 // app/[lang]/layout.tsx
 import type { Metadata, ResolvingMetadata, Viewport } from 'next'
+import * as React from 'react'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { Toaster } from '@/components/ui/toaster'
 import { notFound } from 'next/navigation'
 import { i18n } from '@/config/i18n.config'
-import { getDictionary } from '@/lib/dictionary'
+import { getDictionary } from '@/src/lib/get-dictionary'
 
 // Define Language type based on your config
 type Lang = (typeof i18n.locales)[number]

@@ -1,59 +1,118 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, MapPin } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import type { RestaurantGridProps } from '@/types/restaurant';
-import { restaurantImageSizes } from '../page';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import type { Restaurant } from '@/types/restaurant';
+import type { Filters } from './restaurant-filters';
+import { useMemo } from 'react';
 
-export function RestaurantGrid({ restaurants, dict, lang }: RestaurantGridProps) {
+interface RestaurantGridProps {
+  restaurants: Restaurant[];
+  dict: {
+    reviews: string;
+    location: string;
+    priceRange: string;
+    viewDetails: string;
+  };
+  lang: string;
+  filters?: {
+    search?: string;
+    type?: string;
+    category?: string;
+    area?: string;
+    priceRange?: string;
+  };
+}
+
+export function RestaurantGrid({ restaurants, dict, lang, filters = {} }: RestaurantGridProps) {
+  const filteredRestaurants = useMemo(() => {
+    return restaurants.filter(restaurant => {
+      const translation = restaurant.restaurant_translations.find(t => t.language === lang) 
+        || restaurant.restaurant_translations[0];
+      const neighborhood = restaurant.neighborhoods.neighborhood_translations.find(t => t.language === lang)?.name;
+      const categories = restaurant.restaurant_categories.map(rc => 
+        rc.category.category_translations.find(t => t.language === lang)?.name
+      ).filter(Boolean);
+
+      const matchesSearch = !filters.search || 
+        translation.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+        translation.description.toLowerCase().includes(filters.search.toLowerCase());
+
+      const matchesType = !filters.type || categories.includes(filters.type);
+      const matchesCategory = !filters.category || categories.includes(filters.category);
+      const matchesArea = !filters.area || neighborhood === filters.area;
+      const matchesPriceLevel = !filters.priceRange || 
+        '$'.repeat(restaurant.price_range) === filters.priceRange;
+
+      return matchesSearch && matchesType && matchesCategory && 
+        matchesArea && matchesPriceLevel;
+    });
+  }, [restaurants, filters, lang]);
+
+  if (filteredRestaurants.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-lg text-muted-foreground">No restaurants found matching your criteria.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {restaurants.map((restaurant) => (
-        <motion.div
-          key={restaurant.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <Link href={`/${lang}/restaurants/${restaurant.slug}`}>
-            <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-[4/3] relative">
-                <Image
-                  src={restaurant.image}
-                  alt={restaurant.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
-                  priority={restaurant.id <= 3}
-                  quality={85}
-                />
-              </div>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold">{restaurant.name}</h3>
-                  <span className="text-sm font-medium">{restaurant.priceRange}</span>
-                </div>
-                <p className="mt-2 flex items-center text-sm text-muted-foreground">
-                  <MapPin className="mr-1 h-4 w-4" />
-                  {restaurant.location}
-                </p>
-                <div className="mt-4 flex items-center gap-2">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span className="font-medium">{restaurant.rating}</span>
-                  <span className="text-sm text-muted-foreground">
-                    ({restaurant.reviews} {dict.reviews})
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {filteredRestaurants.map((restaurant) => {
+        const translation = restaurant.restaurant_translations.find(t => t.language === lang) 
+          || restaurant.restaurant_translations[0];
+        const neighborhood = restaurant.neighborhoods.neighborhood_translations.find(t => t.language === lang)?.name;
+        const categories = restaurant.restaurant_categories.map(rc => 
+          rc.category.category_translations.find(t => t.language === lang)?.name
+        ).filter(Boolean);
+
+        return (
+          <Link
+            key={restaurant.id}
+            href={`/${lang}/restaurants/${restaurant.slug}`}
+            className="group relative overflow-hidden rounded-lg bg-white shadow-md transition-transform hover:-translate-y-1"
+          >
+            <div className="aspect-[4/3] relative">
+              <Image
+                src={restaurant.image_url || '/placeholder-restaurant.jpg'}
+                alt={translation.name}
+                fill
+                className="object-cover transition-transform group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+            <div className="p-4">
+              <h2 className="text-xl font-semibold">{translation.name}</h2>
+              <p className="mt-1 line-clamp-2 text-gray-600">
+                {translation.description}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <span className="rounded-full bg-gray-100 px-3 py-1 text-sm">
+                  {'$'.repeat(restaurant.price_range)}
+                </span>
+                <span className="rounded-full bg-gray-100 px-3 py-1 text-sm">
+                  ★ {restaurant.rating.toFixed(1)} ({restaurant.review_count} {dict.reviews})
+                </span>
+                {neighborhood && (
+                  <span className="rounded-full bg-gray-100 px-3 py-1 text-sm">
+                    {dict.location}: {neighborhood}
                   </span>
-                </div>
-              </CardContent>
-              <CardFooter className="p-4 pt-0">
-                <p className="text-sm text-muted-foreground">{restaurant.cuisine}</p>
-              </CardFooter>
-            </Card>
+                )}
+                {categories.map((category, index) => (
+                  <span key={index} className="rounded-full bg-gray-100 px-3 py-1 text-sm">
+                    {category}
+                  </span>
+                ))}
+              </div>
+            </div>
           </Link>
-        </motion.div>
-      ))}
+        );
+      })}
     </div>
   );
 }

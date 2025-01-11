@@ -1,4 +1,8 @@
 import { Metadata } from 'next'
+import { createClient } from '@supabase/supabase-js'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://your-domain.com'),
@@ -38,7 +42,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   )
 } 

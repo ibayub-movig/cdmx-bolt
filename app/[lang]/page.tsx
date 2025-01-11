@@ -1,8 +1,8 @@
-import { Lang } from '@/lib/utils';
+import { Lang } from '@/src/lib/utils';
 import { HeroSection } from '@/components/sections/hero-section';
 import { FeaturedRestaurants } from '@/components/sections/featured-restaurants';
 import { Newsletter } from '@/components/sections/newsletter';
-import { getDictionary } from '@/lib/dictionary';
+import { getServerDictionary as getDictionary } from '@/src/lib/get-dictionary';
 import { notFound } from 'next/navigation';
 import { i18n } from '@/config/i18n.config';
 

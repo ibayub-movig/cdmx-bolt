@@ -1,4 +1,4 @@
-import type { Lang } from '@/lib/utils'
+import type { Lang } from '@/src/lib/utils'
 
 const dictionaries = {
   en: () => import('@/dictionaries/en.json').then((module) => module.default),

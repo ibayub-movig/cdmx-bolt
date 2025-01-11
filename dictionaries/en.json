@@ -31,6 +31,21 @@
       "error": "Something went wrong. Please try again."
     }
   },
+  "restaurant": {
+    "reviews": "Reviews",
+    "count": "reviews",
+    "information": "Information",
+    "reservation": "Reservation",
+    "bookTable": "Book a Table",
+    "neighborhood": "Neighborhood",
+    "cuisine": "Cuisine",
+    "address": "Address",
+    "phone": "Phone",
+    "website": "Website",
+    "hours": "Hours",
+    "priceRange": "Price Range",
+    "viewDetails": "View Details"
+  },
   "footer": {
     "about": {
       "title": "About BestCDMX",
