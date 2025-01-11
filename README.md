@@ -25,7 +25,7 @@ A modern web application showcasing the best restaurants and experiences in Mexi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/cdmx-bolt.git
+   git clone https://github.com/ibayub-movig/cdmx-bolt.git
    ```
 
 2. Install dependencies:
