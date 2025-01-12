@@ -33,7 +33,7 @@ export function RestaurantGrid({ restaurants, dict, lang, filters = {} }: Restau
     return restaurants.filter(restaurant => {
       const translation = restaurant.restaurant_translations.find(t => t.language === lang) 
         || restaurant.restaurant_translations[0];
-      const neighborhood = restaurant.neighborhoods.neighborhood_translations.find(t => t.language === lang)?.name;
+      const neighborhood = restaurant.neighborhoods[0]?.neighborhood_translations.find(t => t.language === lang)?.name;
       const categories = restaurant.restaurant_categories.map(rc => 
         rc.category.category_translations.find(t => t.language === lang)?.name
       ).filter(Boolean);
@@ -66,7 +66,7 @@ export function RestaurantGrid({ restaurants, dict, lang, filters = {} }: Restau
       {filteredRestaurants.map((restaurant) => {
         const translation = restaurant.restaurant_translations.find(t => t.language === lang) 
           || restaurant.restaurant_translations[0];
-        const neighborhood = restaurant.neighborhoods.neighborhood_translations.find(t => t.language === lang)?.name;
+        const neighborhood = restaurant.neighborhoods[0]?.neighborhood_translations.find(t => t.language === lang)?.name;
         const categories = restaurant.restaurant_categories.map(rc => 
           rc.category.category_translations.find(t => t.language === lang)?.name
         ).filter(Boolean);

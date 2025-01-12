@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { getServerDictionary } from '@/lib/get-dictionary';
+import { getServerDictionary } from '@/src/lib/get-dictionary';
 import { ListsGrid } from './components/lists-grid';
 import type { PageProps } from '@/types/shared';
 import type { List } from '@/types/list';
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   return {
     title: dict.lists.title,
-    description: dict.lists.subtitle,
+    description: dict.lists.description,
   };
 }
 
@@ -39,14 +39,17 @@ export default async function ListsPage({ params: { lang } }: PageProps) {
       <div className="max-w-2xl mx-auto text-center">
         <h1 className="text-3xl font-bold">{dict.lists.title}</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          {dict.lists.subtitle}
+          {dict.lists.description}
         </p>
       </div>
 
       <Suspense fallback={<div>Loading lists...</div>}>
         <ListsGrid
           lists={lists}
-          dict={dict.lists}
+          dict={{
+            ...dict.lists,
+            places: 'Places'
+          }}
           lang={lang}
         />
       </Suspense>

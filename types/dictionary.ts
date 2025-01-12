@@ -43,6 +43,18 @@ export interface Dictionary {
       priceRange: string;
       viewDetails: string;
     };
+    lists: {
+      title: string;
+      description: string;
+      viewAll: string;
+      readMore: string;
+    };
+    cuisine: {
+      title: string;
+      description: string;
+      viewAll: string;
+      restaurants: string;
+    };
     footer: {
       rights: string;
       contact: string;

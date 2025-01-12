@@ -10,23 +10,24 @@ const RestaurantGrid = dynamic(() => import('./components/restaurant-grid').then
 });
 
 async function getRestaurants() {
-  const { data: restaurants, error } = await supabase
+  const { data: restaurants } = await supabase
     .from('restaurants')
     .select(`
-      id,
-      slug,
-      image_url,
-      price_range,
-      rating,
-      review_count,
-      opening_hours,
-      custom_score,
-      score_summary,
-      accessibility_score,
-      ambience_score,
-      food_score,
-      service_score,
-      value_score,
+      *,
+      peak_hours,
+      quiet_hours,
+      smart_visit,
+      latitude,
+      longitude,
+      local_tips,
+      website_url,
+      phone_number,
+      place_id,
+      restaurant_translations (
+        name,
+        description,
+        language
+      ),
       neighborhoods (
         neighborhood_translations (
           name,
@@ -34,27 +35,47 @@ async function getRestaurants() {
         )
       ),
       restaurant_categories (
-        category:categories (
+        category (
           category_translations (
             name,
             language
           )
         )
-      ),
-      restaurant_translations (
-        name,
-        description,
-        language
       )
     `);
 
-  if (error) {
-    console.error('Supabase error:', error.message, error.details);
-    throw new Error(`Failed to fetch restaurants: ${error.message}`);
-  }
   if (!restaurants) return [];
 
-  return restaurants;
+  const data = restaurants.map(restaurant => ({
+    id: restaurant.id,
+    slug: restaurant.slug,
+    image_url: restaurant.image_url,
+    price_range: restaurant.price_range,
+    rating: restaurant.rating,
+    review_count: restaurant.review_count,
+    opening_hours: restaurant.opening_hours || "",
+    custom_score: restaurant.custom_score,
+    score_summary: restaurant.score_summary,
+    accessibility_score: restaurant.accessibility_score,
+    ambience_score: restaurant.ambience_score,
+    food_score: restaurant.food_score,
+    service_score: restaurant.service_score,
+    value_score: restaurant.value_score,
+    peak_hours: restaurant.peak_hours || "",
+    quiet_hours: restaurant.quiet_hours || "",
+    smart_visit: restaurant.smart_visit || "",
+    latitude: restaurant.latitude || 0,
+    longitude: restaurant.longitude || 0,
+    local_tips: restaurant.local_tips || "",
+    website_url: restaurant.website_url || "",
+    phone_number: restaurant.phone_number || "",
+    place_id: restaurant.place_id || "",
+    restaurant_translations: restaurant.restaurant_translations,
+    neighborhoods: restaurant.neighborhoods,
+    restaurant_categories: restaurant.restaurant_categories
+  }));
+
+  return data;
 }
 
 export default async function RestaurantsPage({ params: { lang } }: PageProps) {

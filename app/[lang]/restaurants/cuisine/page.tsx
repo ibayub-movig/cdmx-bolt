@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { getServerDictionary } from '@/lib/get-dictionary';
+import { getServerDictionary } from '@/src/lib/get-dictionary';
 import { CuisineGrid } from './components/cuisine-grid';
 import type { PageProps } from '@/types/shared';
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   return {
     title: dict.cuisine.title,
-    description: dict.cuisine.subtitle,
+    description: dict.cuisine.description,
   };
 }
 
@@ -42,7 +42,7 @@ export default async function CuisinePage({ params: { lang } }: PageProps) {
       <div className="max-w-2xl mx-auto text-center">
         <h1 className="text-3xl font-bold">{dict.cuisine.title}</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          {dict.cuisine.subtitle}
+          {dict.cuisine.description}
         </p>
       </div>
 

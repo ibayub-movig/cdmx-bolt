@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { getServerDictionary } from '@/lib/get-dictionary';
+import { getServerDictionary } from '@/src/lib/get-dictionary';
 import { ListContent } from './components/list-content';
 import type { PageProps } from '@/types/shared';
 import type { DetailedList } from '@/types/list';

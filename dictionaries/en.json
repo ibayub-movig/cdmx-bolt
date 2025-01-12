@@ -46,6 +46,18 @@
     "priceRange": "Price Range",
     "viewDetails": "View Details"
   },
+  "lists": {
+    "title": "Curated Lists",
+    "description": "Discover our hand-picked collections",
+    "viewAll": "View All Lists",
+    "readMore": "Read More"
+  },
+  "cuisine": {
+    "title": "Cuisines",
+    "description": "Explore restaurants by cuisine",
+    "viewAll": "View All Cuisines",
+    "restaurants": "Restaurants"
+  },
   "footer": {
     "about": {
       "title": "About BestCDMX",

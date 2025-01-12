@@ -1,8 +1,8 @@
-import { Lang } from '@/config/i18n.config';
+import { Locale } from '@/config/i18n.config';
 
 export interface PageProps {
   params: {
-    lang: Lang;
+    lang: Locale;
     slug?: string;
     cuisine?: string;
   };

@@ -47,7 +47,10 @@ export interface Restaurant {
   }[];
   restaurant_categories: {
     category: {
-      category_translations: CategoryTranslation[];
+      category_translations: {
+        name: string;
+        language: string;
+      }[];
     };
   }[];
 }
